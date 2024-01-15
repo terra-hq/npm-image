@@ -1,7 +1,7 @@
-import TImage from "./TImage.vue"
+import TImage from "./components/TImage.vue"
 
 export default {
     install: (app, options) => {
-        app.use(TImage)
-    },
+        app.component("TImage", TImage)
+    }
 }
