@@ -60,9 +60,7 @@ const props = defineProps({
 const style = ref("16 / 9")
 
 onMounted(() => {
-  if(props.isLazy){
 
-  }
   if(props.width && props.height){
     style.value = `${props.width} / ${props.height}`;
   }
