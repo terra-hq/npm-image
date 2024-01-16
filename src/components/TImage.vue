@@ -1,46 +1,40 @@
 <template>
-    <div>
-        <img 
-            v-if="isLazy"
-            :class="className" 
-            :data-src="src" 
-            :src="getPlaceholderImage()"
-            :alt="getAltName(src)"
-            :width="width"
-            :height="height"
-            :style="style" 
-            :srcset="srcset"
-            :sizes="getSizes()"
-        />
-        <img 
-            v-if="!isLazy"
-            :class="className" 
-            :src="src" 
-            :alt="getAltName(src)"
-            :width="width"
-            :height="height"
-            :style="style" 
-            :srcset="srcset"
-            :sizes="getSizes()"
-        />
-    </div>
+    <img 
+        v-if="isLazy"
+        :class="className" 
+        :data-src="image" 
+        :src="getPlaceholderImage()"
+        :alt="getAltName(image)"
+        :width="width"
+        :height="height"
+        :style="style" 
+        v-html="loopDataAttributes()"
+    />
+    <img 
+        v-if="!isLazy"
+        :class="className" 
+        :src="image" 
+        :alt="getAltName(image)"
+        :width="width"
+        :height="height"
+        :style="style" 
+        dataAtrributes
+        v-html="loopDataAttributes()"
+    />
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
 
 const props = defineProps({
-    image: {
-        type: String,
-    },
     isLazy : {
         type : Boolean,
         default : false
     },
-    className: {
+    image: {
         type: String,
     },
-    alt: {
+    className: {
         type: String,
     },
     width: {
@@ -49,26 +43,26 @@ const props = defineProps({
     height: {
         type: String,
     },
-    srcset: {
-        type: String,
-    },
     showAspectRatio: {
         type : Boolean,
         default : false
     },
+    dataAttributes: {
+        type : Boolean || Array,
+        default : false
+    },
+    placeholder: {
+        type : Boolean || Array,
+        default : false
+    },
 })
-const style = ref("16 / 9")
+const style = ref("");
 
 onMounted(() => {
-
-  if(props.width && props.height){
-    style.value = `${props.width} / ${props.height}`;
-  }
   if(props.showAspectRatio){
-
-  }
-  if(props.sizes){
-    this.getSizes();
+    if(props.width && props.height){
+        style.value = `aspect-ratio: ${props.width} / ${props.height}`
+    }
   }
 })
 
@@ -79,32 +73,21 @@ const getAltName = () =>{
 }
 
 const getPlaceholderImage = ( ) =>{
-    return ""
+    return  props.placeholder ? props.placeholder.value : "/placeholder.png"
 }
 
-const getSizes = () =>{
-    var sizeResult = '';
-    switch (props.sizes) {
-        case 'large':
-            sizeResult = '100vw';
-            break;
-        case 'medium':
-            sizeResult = '(max-width: 810px) 50vw, 100vw';
-            break;
-
-        case 'small':
-            sizeResult = '(max-width: 810px) 33vw, 95vw';
-            break;
-
-        case '':
-            sizeResult = '95vw';
-            break;
-        
-        default:
-            sizeResult = props.sizes;
-            break;
+const loopDataAttributes = () =>{
+    var htmlDataAttribute = 'data-tos';
+    if(props.dataAttributes){
+        if(props.dataAttributes.length > 0 ){
+            props.dataAttributes.forEach(obj => {
+                Object.entries(obj).forEach(([key, value]) => {
+                    htmlDataAttribute = `data-${key}="${value}"`;
+                });
+            });
+            return htmlDataAttribute;
+        }
     }
-    return sizeResult;
+    return htmlDataAttribute;
 }
-
 </script>
