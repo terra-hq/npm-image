@@ -1,4 +1,4 @@
-# Vue Form
+# Vue Image
 
 `tiamge` is a collection of Vue.js components designed to simplify form creation and management in your Vue projects. This component provide a consistent and customizable set of an image with its class, height, width and style.
 
