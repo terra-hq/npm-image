@@ -1,6 +1,6 @@
 # Vue Image
 
-`tiamge` is a collection of Vue.js components designed to simplify form creation and management in your Vue projects. This component provide a consistent and customizable set of an image with its class, height, width and style.
+`timage` is a collection of Vue.js components designed to simplify form creation and management in your Vue projects. This component provide a consistent and customizable set of an image with its class, height, width and style.
 
 ## Installation
 
@@ -17,6 +17,7 @@ For projects using Astro with embedded Vue, create a file named `\_app.ts` and i
 ```sh
 import type { App } from "vue";
 import TImage from "@terrahq/timage";
+import VueLazyload from "vue-lazyload";
 
 export default (app: App) => {
     app.use(TImage);
@@ -38,15 +39,17 @@ Now, you can use the components in any .vue file.
 
 #### Nuxt Project
 
-For Nuxt projects, create a 'Plugins' folder at the root, and within it, create a file (e.g., "form.js"). Inside the file, add the following code:
+For Nuxt projects, create a 'Plugins' folder at the root, and within it, create a file (e.g., "timage.js"). Inside the file, add the following code:
 
 ```sh
-import TImage from "@terrahq/vue-form"
+import TImage from "@terrahq/vue-image"
+import VueLazyload from "vue-lazyload";
 
 export default defineNuxtPlugin((nuxtApp) => {
     nuxtApp.vueApp.use(
         TImage,
-    )
+    );
+    nuxtApp.vueApp.use(VueLazyload);
 })
 ```
 
@@ -63,8 +66,8 @@ Now, you can use the components in any .vue file.
         image="image.png" 
         width="30"
         height="30"
-        showAspectRatio="true"
-        isLazy="false"
+        :showAspectRatio="true"
+        :isLazy="false"
         dataAttributes=false
       />
     <TImage 
@@ -72,19 +75,20 @@ Now, you can use the components in any .vue file.
         image="image.png" 
         width="30"
         height="30"
-        showAspectRatio="true"
-        isLazy="true"
+        :showAspectRatio="true"
+        :isLazy="true"
         dataAttributes=false
-        placholderImage=getPlaceholderImage()
+      />
+       <TImage 
+        className="class"
+        image="image.png" 
+        width="30"
+        height="30"
+        :showAspectRatio="true"
+        :isLazy="true"
+        :dataAttributes=dataAttributes
       />
 </template>  
-
-<script setup>
-// This function should go on a composable Vue file
-const getPlaceholderImage = ( ) =>{
-    return  props.placeholder ? props.placeholder.value : "./placeholder.png"
-}
-</script>
 
 ```
 
@@ -96,11 +100,10 @@ const getPlaceholderImage = ( ) =>{
     -   Props:
         -   **className**: CSS class for styling the form group - (String).
         -   **image**: (Required) URL of the image - (String).
-        -   **width**: Width of the iamge (String)
-        -   **height**: Height of the iamge (String)
+        -   **width**: Width of the image (String)
+        -   **height**: Height of the image (String)
         -   **showAspectRatio**: Set the style='aspect-ratio: width / height' if true. No style if false. (Boolean)
-        -   **isLazy**: Set the data-src='imageURL' if true. src='imageURL' if false. (Boolean)
-        -   **placeholderImage**: Set the src='placeholderImage' if true.(Boolean)
+        -   **isLazy**: Sets v-lazy='image' if true. src='imageURL' if false. (Boolean)
         -   **dataAttributes**: Sets an array of attributes related to the image. (Array)
 
 ## Example of data Attributes 
