@@ -17,7 +17,6 @@ For projects using Astro with embedded Vue, create a file named `\_app.ts` and i
 ```sh
 import type { App } from "vue";
 import TImage from "@terrahq/timage";
-import VueLazyload from "vue-lazyload";
 
 export default (app: App) => {
     app.use(TImage);
@@ -46,9 +45,7 @@ import TImage from "@terrahq/vue-image"
 import VueLazyload from "vue-lazyload";
 
 export default defineNuxtPlugin((nuxtApp) => {
-    nuxtApp.vueApp.use(
-        TImage,
-    );
+    nuxtApp.vueApp.use( TImage );
     nuxtApp.vueApp.use(VueLazyload);
 })
 ```
@@ -58,9 +55,21 @@ Now, you can use the components in any .vue file.
 #### Wordpress
 
 ## Usage
-
+### WITH LAZY Images
 ```sh
-<template>
+    <TImage 
+    className="class"
+    image="image.png" 
+    width="30"
+    height="30"
+    :showAspectRatio="true"
+    :isLazy="true"
+    dataAttributes=false
+    />
+```
+
+### WITHOUT LAZY Images
+```sh
     <TImage 
         className="class"
         image="image.png" 
@@ -69,27 +78,28 @@ Now, you can use the components in any .vue file.
         :showAspectRatio="true"
         :isLazy="false"
         dataAttributes=false
-      />
-    <TImage 
-        className="class"
-        image="image.png" 
-        width="30"
-        height="30"
-        :showAspectRatio="true"
-        :isLazy="true"
-        dataAttributes=false
-      />
-       <TImage 
-        className="class"
-        image="image.png" 
-        width="30"
-        height="30"
-        :showAspectRatio="true"
-        :isLazy="true"
-        :dataAttributes=dataAttributes
-      />
-</template>  
+    />
+```
 
+### WITH DATA ATTRIBUTES
+```sh
+    <TImage 
+    className="class"
+    image="image.png" 
+    width="30"
+    height="30"
+    :showAspectRatio="true"
+    :isLazy="true"
+    :dataAttributes="dataAttributes"
+    />
+```
+## Example of data Attributes 
+```sh js
+ var dataAttributes = [
+    {tos : "200"},
+    {tos-bg: 'true'},
+    {tos-start: '100%'}
+ ];
 ```
 
 ## Components
@@ -106,11 +116,3 @@ Now, you can use the components in any .vue file.
         -   **isLazy**: Sets v-lazy='image' if true. src='imageURL' if false. (Boolean)
         -   **dataAttributes**: Sets an array of attributes related to the image. (Array)
 
-## Example of data Attributes 
-```sh js
- var dataAttributes = [
-    {tos : "200"},
-    {tos-bg: 'true'},
-    {tos-start: '100%'}
- ];
-```
