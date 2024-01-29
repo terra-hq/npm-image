@@ -18,21 +18,17 @@ const props = defineProps({
     type: String,
   },
   width: {
-    type: String,
+    type: String | Number,
   },
   height: {
-    type: String,
+    type: String | Number,
   },
   showAspectRatio: {
-    type: Boolean,
+    type: Boolean | String,
     default: false,
   },
   dataAttributes: {
     type: Boolean || Array,
-    default: false,
-  },
-  placeholder: {
-    type: Boolean || String,
     default: false,
   },
 });
@@ -47,7 +43,6 @@ onMounted(() => {
 });
 
 const getAltName = () => {
-  console.log("ENTE1");
   if (props.alt) return props.alt;
   return props.image.split("/").pop();
 };
