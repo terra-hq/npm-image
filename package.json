@@ -1,6 +1,6 @@
 {
   "name": "@terrahq/timage",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "type": "module",
   "main": "./dist/npm-image.umd.js",
   "module": "./dist/npm-image.es.js",
