@@ -18,19 +18,19 @@ const props = defineProps({
     type: String,
   },
   width: {
-    type: String | Number,
+    type: String || Number,
   },
   height: {
-    type: String | Number,
+    type: String || Number,
   },
   showAspectRatio: {
-    type: Boolean | String,
+    type: Boolean || String,
     default: false,
   },
   dataAttributes: {
     type: Boolean || Array,
     default: false,
-  },
+  }
 });
 const style = ref("");
 

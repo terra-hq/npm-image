@@ -13,13 +13,13 @@ const b = ["alt", "width", "height", "innerHTML"], v = ["src", "alt", "width", "
       type: String
     },
     width: {
-      type: String | Number
+      type: String || Number
     },
     height: {
-      type: String | Number
+      type: String || Number
     },
     showAspectRatio: {
-      type: Boolean | String,
+      type: Boolean || String,
       default: !1
     },
     dataAttributes: {
