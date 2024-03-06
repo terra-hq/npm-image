@@ -1,6 +1,6 @@
 <template>
-  <img v-if="isLazy" :class="className" :alt="getAltName(image)" v-lazy="image" :width="width" :height="height" :style="style" v-html="loopDataAttributes()" />
-  <img v-if="!isLazy" :class="className" :src="image" :alt="getAltName(image)" :width="width" :height="height" :style="style" v-html="loopDataAttributes()" />
+  <img v-if="isLazy" :class="className" :alt="getAltName(image)" v-lazy="image" :width="width" :height="height" :style="style" v-html="loopDataAttributes()" decoding="async" />
+  <img v-if="!isLazy" :class="className" :src="image" :alt="getAltName(image)" :width="width" :height="height" :style="style" v-html="loopDataAttributes()" decoding="async" />
 </template>
 
 <script setup>
